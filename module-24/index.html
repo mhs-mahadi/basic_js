@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+    </style>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+    <ul id="users_container">
+        <p>User Name</p>
+    </ul>
+    <ul id="company_container">
+        <p>Company Name</p>
+    </ul>
+    <table>
+
+    <h2>A basic HTML table</h2>
+
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Contact</th>
+          </tr>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+    </table>
+
+    <script>
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(json => displayUser(json))
+
+      function displayUser(users){
+        console.log('users', users)
+        const userName = users.map(users => users.username);
+        console.log(userName);
+        const ul = document.getElementById('users_container');
+
+        for (let index = 0; index < userName.length; index++) {
+            const user = userName[index];
+            const li = document.createElement('li');
+            li.innerText = user;
+            ul.appendChild(li);
+            
+        }
+
+
+        const company_ul = document.getElementById('company_container')
+        const companyName = users.map(users => users.company.name);
+        console.log(companyName);
+        for (let index = 0; index < companyName.length; index++) {
+            const cName = companyName[index];
+            const li = document.createElement('li');
+            li.innerText = cName;
+            company_ul.appendChild(li);
+            
+        }
+      }
+    </script>
+</body>
+</html>
